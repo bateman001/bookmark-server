@@ -43,14 +43,11 @@ bookmarkRouter
             logger.error("Did not recieve id")
             res.status(400).send('invalid request')
         }
-
         const bookmark = bookmarks.find(b => b.id == id)
-
-        if(bookmark === -1){
+        if(!bookmark){
             logger.error(`${id} was not found in bookmarks`)
             return res.status(404).send('bookmark not found')
-        }
-        
+        }       
         logger.info(`bookmark with ${id} was found`)
         res.status(200).json(bookmark)
     })
@@ -64,7 +61,7 @@ bookmarkRouter
 
         const bookmarkIndex = bookmarks.findIndex(b => b.id == id)
 
-        if(bookmark === -1){
+        if(bookmarkIndex === -1){
             logger.error(`${id} not found`)
             res.status(404).send(`${id} nod found`)
         }
