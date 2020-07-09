@@ -12,3 +12,13 @@
 {"message":"bookmark with 1a7b4de6-d098-45d0-a5af-774bb1c30cfd was deleted","level":"info"}
 {"message":"1a7b4de6-d098-45d0-a5af-774bb1c30cfd not found","level":"error"}
 {"message":"bookmark with 1a7b4de6-d098-45d0-a5af-774bb1c30cfd was deleted","level":"info"}
+{"message":"Unauthorized request to path: /bookmarks","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks","level":"error"}
+{"message":"bookmark with 1d174943-f2f3-4b75-8b37-cbe894e43972 created","level":"info"}
+{"message":"Unauthorized request to path: /bookmarks","level":"error"}
+{"message":"bookmark with 1e092133-12e4-4551-93dd-b69ac29626a0 created","level":"info"}
+{"message":"Unauthorized request to path: /bookmarks/1e092133-12e4-4551-93dd-b69ac29626a0","level":"error"}
+{"message":"bookmark with 1e092133-12e4-4551-93dd-b69ac29626a0 was deleted","level":"info"}
+{"message":"Unauthorized request to path: /bookmarks/1e092133-12e4-4551-93dd-b69ac29626a0","level":"error"}
+{"message":"1e092133-12e4-4551-93dd-b69ac29626a0 was not found in bookmarks","level":"error"}
