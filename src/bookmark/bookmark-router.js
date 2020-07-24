@@ -69,7 +69,7 @@ bookmarkRouter
 
         const bookmarkIndex = bookmarks.findIndex(b => b.id == id)
 
-        if(bookmark === -1){
+        if(bookmarkIndex === -1){
             logger.error(`${id} not found`)
             res.status(404).send(`${id} nod found`)
         }
