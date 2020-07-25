@@ -2,3 +2,90 @@
 {"message":"bookmark with 0de165ba-abd7-4ef4-9fc7-001f6d8ce31d created","level":"info"}
 {"message":"Did not recieve id","level":"error"}
 {"message":"bookmark with 2 was found","level":"info"}
+{"message":"Unauthorized request to path: /bookmarks","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks/12345","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks/2","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks/12345","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks/2","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks","level":"error"}
+{"message":"bookmark with 2 was found","level":"info"}
+{"message":"bookmark with 2 was found","level":"info"}
+{"message":"bookmark with 2 was found","level":"info"}
+{"message":"bookmark with 2 was found","level":"info"}
+{"message":"bookmark with 2 was found","level":"info"}
+{"message":"bookmark with 2 was found","level":"info"}
+{"message":"bookmark with 2 was found","level":"info"}
+{"message":"bookmark with 1 created","level":"info"}
+{"message":"bookmark with 2 was found","level":"info"}
+{"message":"bookmark with 1 created","level":"info"}
+{"message":"bookmark with 2 was found","level":"info"}
+{"message":"bookmark with 1 created","level":"info"}
+{"message":"bookmark with 1 was found","level":"info"}
+{"message":"bookmark with 2 was found","level":"info"}
+{"message":"bookmark with 1 created","level":"info"}
+{"message":"bookmark with 1 was found","level":"info"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"bookmark with 2 was found","level":"info"}
+{"message":"bookmark with 1 created","level":"info"}
+{"message":"bookmark with 1 was found","level":"info"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"bookmark with 2 was found","level":"info"}
+{"message":"bookmark with 1 created","level":"info"}
+{"message":"bookmark with 1 was found","level":"info"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"bookmark with 2 was found","level":"info"}
+{"message":"bookmark with 1 created","level":"info"}
+{"message":"bookmark with 1 was found","level":"info"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"bookmark with 2 was found","level":"info"}
+{"message":"bookmark with 1 created","level":"info"}
+{"message":"bookmark with 1 was found","level":"info"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"bookmark with 2 was deleted","level":"info"}
+{"message":"bookmark with 1 created","level":"info"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"bookmark with 2 was deleted","level":"info"}
+{"message":"bookmark with 1 created","level":"info"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"bookmark with 2 was deleted","level":"info"}
+{"message":"bookmark with 1 created","level":"info"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"bookmark with 2 was deleted","level":"info"}
+{"message":"bookmark with 1 created","level":"info"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"bookmark with 2 was deleted","level":"info"}
+{"message":"bookmark with 1 created","level":"info"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"bookmark with 2 was deleted","level":"info"}
+{"message":"bookmark with 1 created","level":"info"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"bookmark with 2 was deleted","level":"info"}
+{"message":"bookmark with 1 created","level":"info"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"Title, url or rating is undefined","level":"error"}
+{"message":"bookmark with 2 was deleted","level":"info"}

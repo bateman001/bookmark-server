@@ -4,5 +4,4 @@ CREATE TABLE bookmark_articles(
     url TEXT NOT NULL,
     description TEXT,
     rating INT
-
 );

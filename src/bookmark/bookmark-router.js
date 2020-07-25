@@ -1,10 +1,9 @@
 express = require('express')
 const bodyParser = express.json()
 const logger = require('../logger')
-const { v4: uuid} = require('uuid')
-const { bookmarks } = require('../Store')
 const bookmarkRouter = express.Router()
 const bookmarkService = require('./bookmarkService')
+const xss = require('xss')
 
 bookmarkRouter
     .route('/bookmarks')
@@ -16,68 +15,66 @@ bookmarkRouter
     })
     .post(bodyParser, (req, res, next) => {
         const { title, url, rating } = req.body 
+        const bookmark = {title, url, rating}
+        const knexInstance = req.app.get('db')
 
         if(!title || !url || !rating){
             logger.error("Title, url or rating is undefined")
-            return res.status(400).send('invalid request')
+            return res.status(400).json({
+                error: {message: `invalid request`}
+            })
         }
 
-        const bookmark = {
-            title,
-            url,
-            rating
-        }
-
-        const knexInstance = req.app.get('db')
-
-        bookmarkService.insertBookMark(knexInstance, bookmark).then(bookmark => {
-           logger.info(`bookmark with ${id} created`)
-           return res.status(200).location(`http://localhost:8000/bookmark/${id}`).json(bookmark)
-        })
+        bookmarkService.insertBookMark(knexInstance, bookmark)
+            .then(bookmarks => {
+                logger.info(`bookmark with ${bookmarks.id} created`)
+               return res.status(201)
+                    .location(`http://localhost:8000/bookmarks/${bookmarks.id}`)
+                    .json(bookmarks)
+            })
+            .catch(next)
     })
 
 
 bookmarkRouter
     .route('/bookmarks/:bookmark_id')
-    .get((req, res, next) => {
-        const  id  = req.params.bookmark_id
-        const knexInstance = req.app.get('db')
-        if(!id){
-            logger.error("Did not recieve id")
-            res.status(400).send('invalid request')
-        }
-
-        bookmarkService.getById(knexInstance, id)
+    .all((req, res, next) => {
+        bookmarkService.getById(req.app.get('db'), req.params.bookmark_id)
             .then(bookmark => {
                 if(!bookmark){
-                   return res.status(404).json({
-                        error: { message: `Article doesn't exist` }                
+                    return res.status(404).json({
+                        error: {message: `Bookmark doesn't exist`}
                     })
                 }
-                logger.info(`bookmark with ${id} was found`)
-                res.status(200).json(bookmark)    
-            })   
-            .catch(next)     
+
+                res.bookmark = bookmark
+                next()
+            })
+            .catch(next)
     })
-    .delete((req,res) => {
-        const { id } = req.params
-        console.log(id)
+    .get((req, res, next) => {
+        res.json({
+            id: res.bookmark.id,
+            title: xss(res.bookmark.title),
+            url: res.bookmark.url,
+            rating: res.bookmark.rating,
+            description: res.bookmark.description
+        })
+    })
+    .delete((req,res, next) => {
+        const id  = req.params.bookmark_id
+
         if(!id){
             logger.error('No id was given') 
             res.status(400).send('invalid request') 
         }
 
-        const bookmarkIndex = bookmarks.findIndex(b => b.id == id)
-
-        if(bookmarkIndex === -1){
-            logger.error(`${id} not found`)
-            res.status(404).send(`${id} nod found`)
-        }
-
-        bookmarks.splice(bookmarkIndex, 1)
-
-        logger.info(`bookmark with ${id} was deleted`)
-        res.status(204).end()
+        bookmarkService.deleteBookMark(req.app.get('db'), id)
+            .then(bookmark => {
+                logger.info(`bookmark with ${id} was deleted`)
+                return res.status(204).end()
+            })
+            .catch(next)
     })
     
 

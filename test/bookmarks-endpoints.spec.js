@@ -53,7 +53,7 @@ describe.only('bookmark endpoints', function() {
                 return supertest(app)
                     .get(`/bookmarks/${bookmarkID}`)
                     .expect(404, {
-                        error: { message: `Article doesn't exist` }                
+                        error: { message: `Bookmark doesn't exist` }                
                     })
             })
         })
@@ -74,6 +74,118 @@ describe.only('bookmark endpoints', function() {
                     .get(`/bookmarks/${bookmarkID}`)
                     .expect(200, expectedBookmark)
 
+            })
+        })
+    })
+
+    describe('POST /bookmarks', () => {
+        it('will post when given data', () => {
+            const newArticle = {
+                title: 'new title',
+                url: 'new url',
+                rating: 5,
+                description: 'Think outside the classroom',
+            }
+
+            return supertest(app)
+                .post('/bookmarks')
+                .send(newArticle)
+                .expect(201)
+                .expect(res => {
+                    console.log(res)
+                    expect(res.body.title).to.eql(newArticle.title)
+                    expect(res.body.url).to.eql(newArticle.url)
+                    expect(res.body.rating).to.eql(newArticle.rating)
+                    expect(res.body).to.have.property('id')
+
+                })
+                .then(postRes => {
+                    return supertest(app)
+                        .get(`/bookmarks/${postRes.body.id}`)
+                        .expect(postRes.body)
+                })
+        })
+
+        it('will return 400 when title is missing', () => {
+            const newArticle = {
+                url: 'new url',
+                rating: 4
+            }
+
+            return supertest(app)
+                .post('/bookmarks')
+                .send(newArticle)
+                .expect(400, {
+                    error: {message: `invalid request`}
+                })
+
+        })
+
+        it('will return 400 when url is missing', () => {
+            const newArticle = {
+                title: 'new title',
+                rating: 4
+            }
+
+            return supertest(app)
+                .post('/bookmarks')
+                .send(newArticle)
+                .expect(400, {
+                    error: {message: `invalid request`}
+                })
+
+        })
+
+        it('will return 400 when content is missing', () => {
+            const newArticle = {
+                title: 'new title',
+                url: 'new url'
+            }
+
+            return supertest(app)
+                .post('/bookmarks')
+                .send(newArticle)
+                .expect(400, {
+                    error: {message: `invalid request`}
+                })
+
+        })
+
+    })
+
+    describe('DELETE /bookmarks/bookmark_id', () => {
+        context('given there are articles in the database', () => {
+            const newBookMarks = makeBookMarkArray();
+            beforeEach('populate database', () => {
+                return db
+                    .into('bookmark_articles')
+                    .insert(newBookMarks)
+                })
+
+            it('will respond with 204 and remove the article', () => {
+                const deletedId = 2
+                const expectedArticle = newBookMarks.filter(bookmark => bookmark.id !== deletedId)
+    
+                return supertest(app)
+                    .delete(`/bookmarks/${deletedId}`)
+                    .expect(204)
+                    .then(res => {
+                        return supertest(app)
+                            .get('/bookmarks')
+                            .expect(expectedArticle)
+                    })    
+            })
+        })
+
+        context('given no articles in the database', () => {
+            it('will respond with a 404', () => {
+                const bookmarkId = 12345
+
+                return supertest(app)
+                    .delete(`/bookmarks/${bookmarkId}`)
+                    .expect(404, {
+                        error: {message: `Bookmark doesn't exist`}
+                    })
             })
         })
     })
