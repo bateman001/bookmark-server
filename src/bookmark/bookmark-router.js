@@ -6,7 +6,7 @@ const bookmarkService = require('./bookmarkService')
 const xss = require('xss')
 
 bookmarkRouter
-    .route('/bookmarks')
+    .route('/api/bookmarks')
     .get((req, res, next) => {
         const knexInstance = req.app.get('db')
         bookmarkService.getAllBookMarks(knexInstance)
@@ -14,11 +14,11 @@ bookmarkRouter
             .catch(next)
     })
     .post(bodyParser, (req, res, next) => {
-        const { title, url, rating } = req.body 
-        const bookmark = {title, url, rating}
+        const { title, url, rating, description } = req.body 
+        const bookmark = {title, url, rating, description}
         const knexInstance = req.app.get('db')
 
-        if(!title || !url || !rating){
+        if(!title || !url || !rating || !description){
             logger.error("Title, url or rating is undefined")
             return res.status(400).json({
                 error: {message: `invalid request`}
@@ -37,7 +37,7 @@ bookmarkRouter
 
 
 bookmarkRouter
-    .route('/bookmarks/:bookmark_id')
+    .route('/api/bookmarks/:bookmark_id')
     .all((req, res, next) => {
         bookmarkService.getById(req.app.get('db'), req.params.bookmark_id)
             .then(bookmark => {
@@ -57,7 +57,7 @@ bookmarkRouter
             id: res.bookmark.id,
             title: xss(res.bookmark.title),
             url: res.bookmark.url,
-            rating: res.bookmark.rating,
+            rating: res.bookmark.rating, //xss converts int to string why and how to fix?
             description: res.bookmark.description
         })
     })
@@ -76,6 +76,24 @@ bookmarkRouter
             })
             .catch(next)
     })
-    
+    .patch(bodyParser, (req, res, next) => {
+        const {title, url, description, rating } = req.body
+        const bookmarkToUpdate = { title, url, description, rating}
+
+        const numberOfValues = Object.values(bookmarkToUpdate).filter(Boolean).length
+        
+        if (numberOfValues === 0) {
+            return res.status(400).json({
+                error: {message: `Request body must contain either 'title', 'url', 'rating' or 'description'`}
+            })
+        }
+
+        bookmarkService.updateBookMark(req.app.get('db'), req.params.bookmark_id, bookmarkToUpdate)
+            .then(bookmark => {
+                res.status(204).end()
+            })
+            .catch(next)
+
+    })
 
     module.exports = bookmarkRouter
