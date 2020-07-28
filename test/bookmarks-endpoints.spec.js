@@ -32,7 +32,8 @@ describe('bookmark endpoints', function() {
                 .expect(200, [])
             })    
         })
-                context('given the table is populated', () => {
+
+        context('given the table is populated', () => {
             const testBookmarks = makeBookMarkArray()
             beforeEach('insert Articles', () => {
                 return db
@@ -48,6 +49,7 @@ describe('bookmark endpoints', function() {
             })
         })
     })
+
     describe('GET /bookmarks/:bookmark_id', () => {
         context('given no bookmarks', () => {
             it('responds with 404', () => {
@@ -144,7 +146,7 @@ describe('bookmark endpoints', function() {
 
         })
 
-        it('will return 400 when content is missing', () => {
+        it('will return 400 when rating is missing', () => {
             const newArticle = {
                 title: 'new title',
                 url: 'new url'
@@ -202,7 +204,7 @@ describe('bookmark endpoints', function() {
         })
     })
 
-    describe('/PATCH /api/bookmarks/bookmark_id', () => {
+    describe.only('/PATCH /api/bookmarks/bookmark_id', () => {
         context('given no articles', () => {
             it('will respond with 400', () => {
                 const id = 12345
@@ -289,7 +291,6 @@ describe('bookmark endpoints', function() {
                         .expect(expectedBookmark)
                     )
             })
-
 
         })
     })

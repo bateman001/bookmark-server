@@ -81,7 +81,11 @@ bookmarkRouter
         const bookmarkToUpdate = { title, url, description, rating}
 
         const numberOfValues = Object.values(bookmarkToUpdate).filter(Boolean).length
-        
+        if(!req.params.bookmark_id){
+            return res.status(404).json({
+                error: {message: 'bookmark id is required'}
+            })
+        }
         if (numberOfValues === 0) {
             return res.status(400).json({
                 error: {message: `Request body must contain either 'title', 'url', 'rating' or 'description'`}
